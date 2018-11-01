@@ -6,7 +6,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { from } from 'rxjs';
+import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
+import { map, filter, switchMap } from 'rxjs/operators';
 import {FormsModule} from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { LigasComponent } from './ligas/ligas.component';
@@ -26,14 +27,15 @@ import {AuthService} from './servicios/auth.service';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireAuthModule} from 'angularfire2/auth';
+import {AuthGuard} from './guards/auth.guard';
 const routes :Routes =[
   {path: '',component: InicioComponent},
   {path: 'login',component: LoginComponent},
   {path: 'ligas',component: LigasComponent},
   {path: 'signup', component:SignupComponent},
   {path: 'about', component:AboutComponent},
-  {path: 'presidente', component:IniciopresidenteComponent},
-  {path: 'torneo', component:IniciotorneoComponent},
+  {path: 'presidente', component:IniciopresidenteComponent, canActivate: [AuthGuard]},
+  {path: 'torneo', component:IniciotorneoComponent,},
   {path: 'equipo', component:InicioequipoComponent},
   {path: 'campo', component:IniciocamposComponent},
   {path: 'jugador', component:IniciojugadorComponent},
@@ -70,7 +72,7 @@ const routes :Routes =[
     DataTablesModule,FormsModule,AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [AuthService],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,7 +15,7 @@ export class HeaderpresidenteComponent implements OnInit {
 
   ngOnInit() {
   }
-  cerraSesion(){
+  cerrarSesion(){
     this.authService.logOut()
     .then ((res)=>{
       this.router.navigate(['/inicio']);
