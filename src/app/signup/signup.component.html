@@ -1,0 +1,31 @@
+
+<div class="row register-form">
+    <div class="col-md-8 offset-md-2">
+        <form class="custom-form" (submit)="registrarUsuario()">
+            <h1>Registro de Liga</h1>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label for="name-input-field" class="col-form-label">Nombre Presidente</label></div>
+                <div class="col-sm-6 input-column"><input type="text" class="form-control" /></div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label for="name-input-field" class="col-form-label">Apellido Presidente</label></div>
+                <div class="col-sm-6 input-column"><input type="text" class="form-control" /></div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label for="email-input-field" class="col-form-label">Correo Electronico</label></div>
+                <div class="col-sm-6 input-column"><input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="form-control" /></div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label for="pawssword-input-field" class="col-form-label">Contraseña</label></div>
+                <div class="col-sm-6 input-column"><input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" class="form-control" /></div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label for="repeat-pawssword-input-field" class="col-form-label">Repetir Contraseña</label></div>
+                <div class="col-sm-6 input-column"><input type="password" class="form-control" /></div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label for="name-input-field" class="col-form-label">Nombre de la Liga</label></div>
+                <div class="col-sm-6 input-column"><input type="text" class="form-control" /></div>
+            </div><button class="btn btn-light submit-button" type="submit">Registrar Liga</button></form>
+    </div>
+</div>

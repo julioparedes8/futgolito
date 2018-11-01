@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { from } from 'rxjs';
+import {FormsModule} from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { LigasComponent } from './ligas/ligas.component';
 import { HeaderpresidenteComponent } from './headerpresidente/headerpresidente.component';
@@ -21,6 +22,10 @@ import { IniciocamposComponent } from './iniciocampos/iniciocampos.component';
 import { RegistrarcampoComponent } from './registrarcampo/registrarcampo.component';
 import { IniciojugadorComponent } from './iniciojugador/iniciojugador.component';
 import { RegistrarjugadorComponent } from './registrarjugador/registrarjugador.component';
+import {AuthService} from './servicios/auth.service';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireAuthModule} from 'angularfire2/auth';
 const routes :Routes =[
   {path: '',component: InicioComponent},
   {path: 'login',component: LoginComponent},
@@ -62,9 +67,10 @@ const routes :Routes =[
     BrowserModule,
     RouterModule.forRoot(routes),
     AngularFontAwesomeModule,
-    DataTablesModule
+    DataTablesModule,FormsModule,AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
