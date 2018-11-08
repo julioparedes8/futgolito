@@ -1,20 +1,15 @@
 import { Injectable } from '@angular/core';
-import {AngularFireAuth} from 'angularfire2/auth'
-import * as firebase from 'firebase/app'
-import { resolve } from 'url';
-import { reject } from 'q';
-import { Observable, Subject } from 'rxjs';
+import {AngularFireAuth} from 'angularfire2/auth';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(
-    //inyectar el angular Auth
-    public afAuth: AngularFireAuth
-  ) { }
+  constructor(//inyectar el angular Auth
+    public afAuth: AngularFireAuth) 
+    { 
+  }
   //metodos
   //registar
   registrarUsuario(email: string, pass: string){
@@ -40,4 +35,8 @@ export class AuthService {
   getAuth(){
     return this.afAuth.authState.map(auth => auth);
   }
+  getUser(){
+    return this.afAuth.auth.currentUser;
+  }
 }
+

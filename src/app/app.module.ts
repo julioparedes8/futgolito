@@ -24,10 +24,17 @@ import { RegistrarcampoComponent } from './registrarcampo/registrarcampo.compone
 import { IniciojugadorComponent } from './iniciojugador/iniciojugador.component';
 import { RegistrarjugadorComponent } from './registrarjugador/registrarjugador.component';
 import {AuthService} from './servicios/auth.service';
+import {UsuariosService} from './servicios/usuarios/usuarios.service';
+import {LigasService} from './servicios/ligas/ligas.service';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from 'angularfire2';
+import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AuthGuard} from './guards/auth.guard';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { TorneosService } from './servicios/torneos/torneos.service';
+
 const routes :Routes =[
   {path: '',component: InicioComponent},
   {path: 'login',component: LoginComponent},
@@ -35,14 +42,14 @@ const routes :Routes =[
   {path: 'signup', component:SignupComponent},
   {path: 'about', component:AboutComponent},
   {path: 'presidente', component:IniciopresidenteComponent, canActivate: [AuthGuard]},
-  {path: 'torneo', component:IniciotorneoComponent,},
-  {path: 'equipo', component:InicioequipoComponent},
-  {path: 'campo', component:IniciocamposComponent},
-  {path: 'jugador', component:IniciojugadorComponent},
-  {path: 'registrartorneo', component:RegistrartorneoComponent},
-  {path: 'registrarequipo', component:RegistrarequipoComponent},
-  {path: 'registrarcampo', component:RegistrarcampoComponent},
-  {path: 'registrarjugador', component:RegistrarjugadorComponent},
+  {path: 'torneo', component:IniciotorneoComponent,canActivate: [AuthGuard]},
+  {path: 'equipo', component:InicioequipoComponent,canActivate: [AuthGuard]},
+  {path: 'campo', component:IniciocamposComponent,canActivate: [AuthGuard]},
+  {path: 'jugador', component:IniciojugadorComponent,canActivate: [AuthGuard]},
+  {path: 'registrartorneo', component:RegistrartorneoComponent,canActivate: [AuthGuard]},
+  {path: 'registrarequipo', component:RegistrarequipoComponent,canActivate: [AuthGuard]},
+  {path: 'registrarcampo', component:RegistrarcampoComponent,canActivate: [AuthGuard]},
+  {path: 'registrarjugador', component:RegistrarjugadorComponent,canActivate: [AuthGuard]},
   {path: '**',component: InicioComponent}
 ];
 @NgModule({
@@ -67,12 +74,15 @@ const routes :Routes =[
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(routes),
     AngularFontAwesomeModule,
     DataTablesModule,FormsModule,AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    FlashMessagesModule,
+    AngularFirestoreModule
   ],
-  providers: [AuthService,AuthGuard],
+  providers: [AuthService,AuthGuard,FlashMessagesService,UsuariosService,LigasService,TorneosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
